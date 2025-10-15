@@ -1,7 +1,5 @@
 package ar.edu.ort.p1.tp2.act09.classes;
 
-import java.util.Arrays;
-
 public class Auto {
 
 	private static final int CANT_PAGOS = 12;
@@ -16,8 +14,18 @@ public class Auto {
 		this.pagos = new Pago[CANT_PAGOS];
 	}
 
+	public String getPatente() {
+		return patente;
+	}
+
 	public Fecha getFechaDeIngreso() {
 		return fechaDeIngreso;
+	}
+
+	public void agregarPago(Pago pago, int mes) {
+		if (mes >= 1 && mes <= CANT_PAGOS) {
+			this.pagos[mes - 1] = pago;
+		}
 	}
 
 	public boolean estaAlDia() {
@@ -53,8 +61,7 @@ public class Auto {
 
 	@Override
 	public String toString() {
-		return "Auto [patente=" + patente + ", fechaDeIngreso=" + fechaDeIngreso + ", pagos=" + Arrays.toString(pagos)
-				+ "]";
+		return "Auto [patente=" + patente + ", fechaDeIngreso=" + fechaDeIngreso + "]";
 	}
 
 	private boolean ingresoEsteAnio(Fecha fechaDeIngreso) {
@@ -63,7 +70,7 @@ public class Auto {
 	}
 
 	private boolean pagoEsteMes(int mes) {
-		return this.pagos[mes] != null;
+		return this.pagos[mes - 1] != null; // mes 1 (Enero) = índice 0
 	}
 
 	private int asignarMesDeInicio() {
